@@ -41,6 +41,17 @@ const loadCountryList = async () => {
         countryLi.innerText =url.name.common + " " + url.flag + " " + url.population;
         countryList.appendChild(countryLi);
     });
-
 }
 
+// mvp 4
+// Add a simple <form> to your HTML with a single text-box input and a submit button
+// Create a function which is called when the form is submitted
+// printing the value of the <input> element to the console
+const submitButton = document.querySelector("#submit");
+
+const newSearch = async () => {
+    const inputValue = document.querySelector("#search_input").value;
+    console.log(inputValue);
+}
+
+submitButton.addEventListener("click", () => newSearch());
