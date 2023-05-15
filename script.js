@@ -11,7 +11,8 @@ const fetchCountries =  async () => {
 // have it call first function and populate a global variable with the output
 // call it when the page loads
 const setup = async () => {
-    const countries = fetchCountries();
+    const countries = await fetchCountries();
+    const countriesList = await loadCountryList();
 }
 
 window.addEventListener("load", setup);
@@ -23,26 +24,23 @@ window.addEventListener("load", setup);
 // Call this function following first function within the SetUp() function
 // Ensure that the original <p> element is removed ahead of populating your list
 
-
-
-// loading multiple results
-// on button click = fetch country data
 // have a section with id countries container 
 // loop through each country
 // create a li element 
 // append each li element to the section? or to the ul id countriesList?
 
-// const fetchCountries = async () => {
-//     const countryResponse = await fetch("https://restcountries.com/v3.1/all?fields=name");
-//     const countryJsonData = await countryResponse.json();
+const loadCountryList = async () => {
+    const countryResponse = await fetch("https://restcountries.com/v3.1/all");
+    const countryJsonData = await countryResponse.json();
 
-//     const countryList = document.querySelector("#countriesList");
+    const countryList = document.querySelector("#countriesList");
 
-//     countryJsonData.name.forEach((name) => {
-//         const countryLi = document.createElement("li");
-//         countryLi.innerText = name.common;
-//         countryList.appendChild(countryLi);
-//     });
+    document.querySelector("p").remove();
+    countryJsonData.forEach((url) => {
+        const countryLi = document.createElement("li");
+        countryLi.innerText =url.name.common + " " + url.flag + " " + url.population;
+        countryList.appendChild(countryLi);
+    });
 
-// }
+}
 
